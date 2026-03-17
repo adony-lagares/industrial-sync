@@ -6,7 +6,6 @@ using IndustrialSync.Application.Models;
 
 namespace IndustrialSync.Worker;
 
-// Renomeamos para TelemetryWorker para evitar conflito com o namespace
 public class TelemetryWorker(
     ILogger<TelemetryWorker> logger,
     IServiceProvider serviceProvider,
@@ -22,10 +21,9 @@ public class TelemetryWorker(
         {
             var body = args.Message.Body.ToString();
 
-            // Agora desserializamos para o tipo concreto TelemetryMessage
             var data = JsonSerializer.Deserialize<TelemetryMessage>(body, new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true // Importante caso o JSON venha com letras minúsculas
+                PropertyNameCaseInsensitive = true
             });
 
             if (data != null)
@@ -51,7 +49,6 @@ public class TelemetryWorker(
 
         await processor.StartProcessingAsync(stoppingToken);
 
-        // Mantém o serviço vivo
         await Task.Delay(-1, stoppingToken);
     }
 }

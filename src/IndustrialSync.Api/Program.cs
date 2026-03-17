@@ -6,11 +6,9 @@ using Azure.Messaging.ServiceBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// 1. Configura o Banco de Dados (Pega a connection string da Azure)
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// 2. Injeção de Dependência: "Sempre que alguém pedir ITelemetryRepository, entregue o TelemetryRepository"
 builder.Services.AddScoped<ITelemetryRepository, TelemetryRepository>();
 builder.Services.AddSingleton(new ServiceBusClient(builder.Configuration.GetConnectionString("ServiceBus")));
 

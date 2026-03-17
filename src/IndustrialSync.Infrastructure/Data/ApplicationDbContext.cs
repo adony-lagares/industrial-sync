@@ -9,7 +9,6 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Configuração de Fluent API (Melhor prática que DataAnnotations)
         modelBuilder.Entity<SensorTelemetry>(entity =>
         {
             entity.HasKey(e => e.Id);
