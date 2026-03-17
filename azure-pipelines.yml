@@ -1,0 +1,64 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildConfiguration: 'Release'
+  dotNetVersion: '10.0.x'
+  nodeVersion: '18.x'
+
+stages:
+# --- STAGE 1: Build & Test Backend ---
+- stage: Build_Backend
+  displayName: 'Build .NET 10 Backend'
+  jobs:
+  - job: Build_DotNet
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        version: $(dotNetVersion)
+
+    - script: dotnet restore
+      displayName: 'Restore NuGet Packages'
+
+    - script: dotnet build --configuration $(buildConfiguration)
+      displayName: 'Build Solution'
+
+    - script: dotnet test --no-build --configuration $(buildConfiguration)
+      displayName: 'Run Unit Tests'
+
+# --- STAGE 2: Build Frontend ---
+- stage: Build_Frontend
+  displayName: 'Build React Frontend'
+  jobs:
+  - job: Build_React
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSource: 'spec'
+        versionSpec: $(nodeVersion)
+      displayName: 'Install Node.js'
+
+    - script: |
+        cd web
+        npm install
+      displayName: 'Install NPM Dependencies'
+
+    - script: |
+        cd web
+        npm run build
+      displayName: 'Production Build (Vite)'
+
+# --- STAGE 3: Security Scan (O diferencial para o recrutador) ---
+- stage: Security
+  displayName: 'Security Analysis'
+  jobs:
+  - job: CredScan
+    displayName: 'Credential Scanner'
+    steps:
+    - task: CredScan@3
+      displayName: 'Scan for leaked secrets'
+      continueOnError: true

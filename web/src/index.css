@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilo Dark Industrial para o corpo da página */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #020617; /* Slate 950 */
+    color: #f8fafc; /* Slate 50 */
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}

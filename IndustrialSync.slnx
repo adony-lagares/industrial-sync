@@ -1,0 +1,7 @@
+<Solution>
+  <Project Path="IndustrialSync.Api/IndustrialSync.Api.csproj" />
+  <Project Path="IndustrialSync.Application/IndustrialSync.Application.csproj" />
+  <Project Path="IndustrialSync.Domain/IndustrialSync.Domain.csproj" />
+  <Project Path="IndustrialSync.Infrastructure/IndustrialSync.Infrastructure.csproj" />
+  <Project Path="IndustrialSync.Worker/IndustrialSync.Worker.csproj" />
+</Solution>
