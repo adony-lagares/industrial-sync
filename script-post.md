@@ -3,11 +3,9 @@
     $press = (Get-Random -Minimum 5 -Maximum 55) + (Get-Random -Minimum 0 -Maximum 9)/10
     $eq = "AXIOS-$(Get-Random -Minimum 10 -Maximum 99)"
     
-    # Montamos a URL com os parâmetros igualzinho ao seu Swagger
     $url = "http://localhost:5016/api/Telemetry?equipmentCode=$eq&temp=$temp&press=$press"
 
     try {
-        # Como os dados estão na URL, o -Body vai vazio
         Invoke-RestMethod -Uri $url -Method Post
         
         Write-Host "Enviado com sucesso: Eq $eq | Temp $temp | Press $press" -ForegroundColor Green
