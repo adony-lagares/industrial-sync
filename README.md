@@ -276,5 +276,5 @@ Software Engineer
 
 📍 Ouro Branco --- Minas Gerais --- Brazil
 
-LinkedIn: (add your link)\
-Portfolio: (add your portfolio)
+LinkedIn: https://www.linkedin.com/in/adony-lagares/\
+Portfolio: https://www.adonylagares.com/
