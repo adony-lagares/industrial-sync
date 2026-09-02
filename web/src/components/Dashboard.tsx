@@ -6,10 +6,11 @@ import {
 } from 'recharts';
 import {
     Thermometer, Gauge, Activity, Cpu,
-    LayoutDashboard, History, Settings, Languages
+    LayoutDashboard, History, Settings, Languages, FlaskConical
 } from 'lucide-react';
 import { translations, type Language } from '../i18n/translations';
 import { TEMP_LIMIT, PRESSURE_LIMIT, API_BASE_URL } from '../lib/constants';
+import { generateMockReading, seedMockTelemetry } from '../lib/mockData';
 import HistoricalLogsTable from './HistoricalLogs';
 
 type TelemetryRecord = {
@@ -26,11 +27,13 @@ type TelemetryRecord = {
 type View = 'main' | 'history';
 
 const POLL_INTERVAL_MS = 5000;
+const MAX_MOCK_POINTS = 40;
 
 const Dashboard = () => {
     const [lang, setLang] = useState<Language>('en');
     const [view, setView] = useState<View>('main');
     const [data, setData] = useState<TelemetryRecord[]>([]);
+    const [isDemoMode, setIsDemoMode] = useState(false);
 
     const t = translations[lang];
 
@@ -40,9 +43,16 @@ const Dashboard = () => {
         const fetchTelemetry = async () => {
             try {
                 const response = await axios.get<TelemetryRecord[]>(`${API_BASE_URL}/api/Telemetry`);
-                if (!cancelled) setData(response.data ?? []);
+                if (cancelled) return;
+                setIsDemoMode(false);
+                setData(response.data ?? []);
             } catch {
-                if (!cancelled) setData([]);
+                if (cancelled) return;
+                setIsDemoMode(true);
+                setData(prev => {
+                    const base = prev.length === 0 ? seedMockTelemetry(15) : prev;
+                    return [...base, generateMockReading()].slice(-MAX_MOCK_POINTS);
+                });
             }
         };
 
@@ -77,6 +87,7 @@ const Dashboard = () => {
                 data={data}
                 onBack={() => setView('main')}
                 t={t}
+                isDemoMode={isDemoMode}
             />
         );
     }
@@ -121,6 +132,16 @@ const Dashboard = () => {
             </aside>
 
             <main className="flex-1 p-8 overflow-y-auto">
+                {isDemoMode && (
+                    <div className="mb-6 flex items-center gap-3 bg-amber-500/10 border border-amber-500/30 text-amber-400 px-4 py-3 rounded-2xl">
+                        <FlaskConical size={18} className="shrink-0" />
+                        <div>
+                            <p className="text-xs font-black uppercase tracking-widest">{t.demoMode}</p>
+                            <p className="text-xs text-amber-400/70 font-medium">{t.demoModeSub}</p>
+                        </div>
+                    </div>
+                )}
+
                 <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-slate-950 border border-slate-900 rounded-3xl p-6 flex items-center gap-4">
                         <Cpu className="text-blue-500" size={32} />

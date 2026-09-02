@@ -1,4 +1,4 @@
-import { ArrowLeft, Download, AlertTriangle, Database } from 'lucide-react';
+import { ArrowLeft, Download, AlertTriangle, Database, FlaskConical } from 'lucide-react';
 import { TEMP_LIMIT, PRESSURE_LIMIT } from '../lib/constants';
 import type { Translation } from '../i18n/translations';
 
@@ -8,8 +8,9 @@ import type { Translation } from '../i18n/translations';
  * * @param {Object[]} data - Array of telemetry records.
  * @param {Function} onBack - Navigation callback to return to dashboard.
  * @param {Object} t - Translation dictionary.
+ * @param {boolean} isDemoMode - Whether data shown is synthetic sample data.
  */
-const HistoricalLogsTable = ({ data, onBack, t }: { data: any[], onBack: () => void, t: Translation }) => {
+const HistoricalLogsTable = ({ data, onBack, t, isDemoMode }: { data: any[], onBack: () => void, t: Translation, isDemoMode?: boolean }) => {
 
     /**
      * Logic to handle CSV generation and trigger browser download
@@ -60,6 +61,11 @@ const HistoricalLogsTable = ({ data, onBack, t }: { data: any[], onBack: () => v
                         </h1>
                         <p className="text-slate-500 font-medium text-sm">{t.auditSub}</p>
                     </div>
+                    {isDemoMode && (
+                        <span className="flex items-center gap-1.5 bg-amber-500/10 border border-amber-500/30 text-amber-400 text-[10px] font-black uppercase tracking-widest px-3 py-1.5 rounded-full">
+                            <FlaskConical size={12} /> {t.demoMode}
+                        </span>
+                    )}
                 </div>
 
                 <button

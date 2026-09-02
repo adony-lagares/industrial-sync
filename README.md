@@ -21,6 +21,13 @@ capable of handling:
 This project simulates a **real enterprise Industry 4.0 monitoring
 platform**.
 
+🔗 **[Live Demo](https://adony-lagares.github.io/industrial-sync/)** — the
+dashboard is deployed via GitHub Pages and runs in **Demo Mode** with
+generated sample telemetry. The full pipeline (API + Worker + Azure SQL +
+Service Bus) is implemented and covered by CI, but isn't kept permanently
+hosted to avoid ongoing cloud costs — see [Backend Setup](#backend-setup) to
+run it end‑to‑end locally.
+
 ------------------------------------------------------------------------
 
 # 🚀 Purpose & Business Value

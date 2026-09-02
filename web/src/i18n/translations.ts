@@ -29,7 +29,9 @@ export const translations = {
         stable: "ESTÁVEL",
         noData: "Aguardando sincronização com a nuvem...",
         tempLabel: "Temperatura",
-        pressLabel: "Pressão"
+        pressLabel: "Pressão",
+        demoMode: "Modo Demonstração",
+        demoModeSub: "Dados de exemplo — o backend real (API + Worker + Azure) não fica publicamente hospedado para evitar custos de nuvem"
     },
     en: {
         title: "Industrial Sync",
@@ -58,7 +60,9 @@ export const translations = {
         stable: "STABLE",
         noData: "Waiting for cloud synchronization...",
         tempLabel: "Temperature",
-        pressLabel: "Pressure"
+        pressLabel: "Pressure",
+        demoMode: "Demo Mode",
+        demoModeSub: "Sample data — the real backend (API + Worker + Azure) isn't publicly hosted to avoid cloud costs"
     }
 };
 
