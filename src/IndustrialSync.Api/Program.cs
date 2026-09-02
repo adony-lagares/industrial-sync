@@ -1,8 +1,8 @@
 using IndustrialSync.Domain.Interfaces;
 using IndustrialSync.Infrastructure.Data;
+using IndustrialSync.Infrastructure.Messaging;
 using IndustrialSync.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
-using Azure.Messaging.ServiceBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +10,9 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ITelemetryRepository, TelemetryRepository>();
-builder.Services.AddSingleton(new ServiceBusClient(builder.Configuration.GetConnectionString("ServiceBus")));
+builder.Services.AddSingleton(new ServiceBusPublisher(
+    builder.Configuration.GetConnectionString("ServiceBus")!,
+    "telemetry-queue"));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

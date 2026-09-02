@@ -1,4 +1,6 @@
 import { ArrowLeft, Download, AlertTriangle, Database } from 'lucide-react';
+import { TEMP_LIMIT, PRESSURE_LIMIT } from '../lib/constants';
+import type { Translation } from '../i18n/translations';
 
 /**
  * HistoricalLogsTable Component
@@ -7,15 +9,7 @@ import { ArrowLeft, Download, AlertTriangle, Database } from 'lucide-react';
  * @param {Function} onBack - Navigation callback to return to dashboard.
  * @param {Object} t - Translation dictionary.
  */
-const HistoricalLogsTable = ({ data, onBack, t }: { data: any[], onBack: () => void, t: any }) => {
-
-    /**
-     * threshold constants for telemetry safety limits
-     */
-    const LIMITS = {
-        TEMPERATURE: 80,
-        PRESSURE: 45
-    };
+const HistoricalLogsTable = ({ data, onBack, t }: { data: any[], onBack: () => void, t: Translation }) => {
 
     /**
      * Logic to handle CSV generation and trigger browser download
@@ -28,7 +22,7 @@ const HistoricalLogsTable = ({ data, onBack, t }: { data: any[], onBack: () => v
         const csvRows = data.map(log => {
             const temp = Number(log.temperature || log.Temperature || 0);
             const press = Number(log.pressure || log.Pressure || 0);
-            const statusLabel = (temp > LIMITS.TEMPERATURE || press > LIMITS.PRESSURE) ? t.critical : t.stable;
+            const statusLabel = (temp > TEMP_LIMIT || press > PRESSURE_LIMIT) ? t.critical : t.stable;
             const timestamp = new Date(log.timestamp || log.Timestamp || "").toLocaleString();
             const equipment = log.equipmentCode || log.EquipmentCode || "N/A";
 
@@ -92,8 +86,8 @@ const HistoricalLogsTable = ({ data, onBack, t }: { data: any[], onBack: () => v
                             const temp = Number(log.temperature || log.Temperature || 0);
                             const press = Number(log.pressure || log.Pressure || 0);
 
-                            const isTempCritical = temp > LIMITS.TEMPERATURE;
-                            const isPressCritical = press > LIMITS.PRESSURE;
+                            const isTempCritical = temp > TEMP_LIMIT;
+                            const isPressCritical = press > PRESSURE_LIMIT;
                             const isAnomaly = isTempCritical || isPressCritical;
 
                             return (

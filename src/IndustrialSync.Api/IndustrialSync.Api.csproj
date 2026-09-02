@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\IndustrialSync.Application\IndustrialSync.Application.csproj" />
     <ProjectReference Include="..\IndustrialSync.Infrastructure\IndustrialSync.Infrastructure.csproj" />
   </ItemGroup>
 

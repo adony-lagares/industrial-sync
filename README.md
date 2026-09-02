@@ -43,6 +43,11 @@ system guarantees:
 Operators can monitor **temperature and pressure thresholds** while
 maintaining **historical audit logs** for compliance and analysis.
 
+The reference deployment targets the **Oceania / New Zealand region**
+(`nz-central`), reflecting industrial safety monitoring practices aligned with
+frameworks such as **WorkSafe NZ** and the **AS/NZS 4801** safety management
+standard.
+
 ------------------------------------------------------------------------
 
 # 🧠 System Architecture
@@ -151,9 +156,10 @@ Every telemetry message is stored in **Azure SQL**, allowing:
 The system supports **dynamic language switching**:
 
 -   🇧🇷 Portuguese (Brazil)
--   🇦🇺 English (Australia)
+-   🇳🇿 English (New Zealand)
 
-Designed for **global industrial operations**.
+Designed for **global industrial operations**, with the reference deployment
+targeting the Oceania/New Zealand region (`nz-central`).
 
 ------------------------------------------------------------------------
 
@@ -248,7 +254,7 @@ Planned containerized deployment with:
 Planned improvements:
 
 -   [ ] Azure Key Vault integration
--   [ ] Domain Unit Tests with xUnit
+-   [x] Domain Unit Tests with xUnit
 -   [ ] SignalR real‑time streaming
 -   [ ] Docker Compose deployment
 -   [ ] CI/CD pipeline with GitHub Actions

@@ -1,6 +1,6 @@
 using Azure.Messaging.ServiceBus;
 using IndustrialSync.Domain.Entities;
-using IndustrialSync.Infrastructure.Data;
+using IndustrialSync.Domain.Interfaces;
 using System.Text.Json;
 using IndustrialSync.Application.Models;
 
@@ -29,12 +29,11 @@ public class TelemetryWorker(
             if (data != null)
             {
                 using var scope = serviceProvider.CreateScope();
-                var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                var repository = scope.ServiceProvider.GetRequiredService<ITelemetryRepository>();
 
                 var telemetry = new SensorTelemetry(data.EquipmentCode, data.Temp, data.Press);
 
-                context.Telemetries.Add(telemetry);
-                await context.SaveChangesAsync();
+                await repository.AddAsync(telemetry);
 
                 logger.LogInformation("Telemetry processed successfully: {Id} for {Code}", telemetry.Id, data.EquipmentCode);
             }

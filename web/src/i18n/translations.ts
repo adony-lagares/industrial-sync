@@ -1,0 +1,66 @@
+/**
+ * Interface and Translations for Internationalization (i18n)
+ */
+export const translations = {
+    pt: {
+        title: "Industrial Sync",
+        version: "v2.0",
+        region: "Hub Região Oceania • Implantação: nz-central",
+        mainDash: "Painel Principal",
+        histLogs: "Logs Históricos",
+        settings: "Configurações",
+        activeNodes: "Nós Ativos",
+        avgTemp: "Média Temp",
+        peakPress: "Pico Pressão",
+        liveSensor: "Sensor ao Vivo",
+        tempAnalysis: "Análise de Temperatura",
+        hydLine: "Linha Hidráulica",
+        pressMetrics: "Métricas de Pressão",
+        realTimeStream: "Fluxo de Telemetria Real-Time",
+        eventStream: "Fluxo de Eventos",
+        auditTitle: "Audit",
+        auditLogs: "Logs",
+        auditSub: "Histórico completo de telemetria armazenado no Azure SQL",
+        export: "Exportar CSV",
+        timestamp: "Data/Hora",
+        equipment: "Equipamento",
+        status: "Status",
+        critical: "CRÍTICO",
+        stable: "ESTÁVEL",
+        noData: "Aguardando sincronização com a nuvem...",
+        tempLabel: "Temperatura",
+        pressLabel: "Pressão"
+    },
+    en: {
+        title: "Industrial Sync",
+        version: "v2.0",
+        region: "Oceania Region Hub • Deployment: nz-central",
+        mainDash: "Main Dashboard",
+        histLogs: "Historical Logs",
+        settings: "Settings",
+        activeNodes: "Active Nodes",
+        avgTemp: "Avg Temp",
+        peakPress: "Peak Press",
+        liveSensor: "Live Sensor",
+        tempAnalysis: "Temperature Analysis",
+        hydLine: "Hydraulic Line",
+        pressMetrics: "Pressure Metrics",
+        realTimeStream: "Real-Time Telemetry Stream",
+        eventStream: "Event Stream",
+        auditTitle: "Audit",
+        auditLogs: "Logs",
+        auditSub: "Full telemetry history stored on Azure SQL",
+        export: "Export CSV",
+        timestamp: "Timestamp",
+        equipment: "Equipment",
+        status: "Status",
+        critical: "CRITICAL",
+        stable: "STABLE",
+        noData: "Waiting for cloud synchronization...",
+        tempLabel: "Temperature",
+        pressLabel: "Pressure"
+    }
+};
+
+export type Language = keyof typeof translations;
+export type Translation = typeof translations.pt;

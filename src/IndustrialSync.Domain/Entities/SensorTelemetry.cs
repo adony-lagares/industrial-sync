@@ -2,6 +2,9 @@ namespace IndustrialSync.Domain.Entities;
 
 public class SensorTelemetry
 {
+    private const double TemperatureLimit = 80;
+    private const double PressureLimit = 45;
+
     public Guid Id { get; private set; }
     public string EquipmentCode { get; private set; } = string.Empty;
     public double Temperature { get; private set; }
@@ -19,5 +22,5 @@ public class SensorTelemetry
         Timestamp = DateTime.UtcNow;
     }
 
-    public bool IsCritical() => Temperature > 100 || Pressure > 60;
+    public bool IsCritical() => Temperature > TemperatureLimit || Pressure > PressureLimit;
 }
