@@ -5,7 +5,7 @@
 ![Azure](https://img.shields.io/badge/Cloud-Azure-0078D4)
 ![Architecture](https://img.shields.io/badge/Architecture-Clean%20Architecture-green)
 ![Architecture](https://img.shields.io/badge/Architecture-Event_Driven-orange)
-![Azure Pipelines](https://img.shields.io/badge/Azure_Pipelines-Enabled-0078D7?logo=azure-pipelines&logoColor=white)
+![CI](https://github.com/adony-lagares/industrial-sync/actions/workflows/ci.yml/badge.svg)
 ![License](https://img.shields.io/badge/License-MIT-lightgrey)
 
 **Industrial Sync** is a high‑performance **IoT telemetry monitoring
@@ -257,7 +257,7 @@ Planned improvements:
 -   [x] Domain Unit Tests with xUnit
 -   [ ] SignalR real‑time streaming
 -   [ ] Docker Compose deployment
--   [ ] CI/CD pipeline with GitHub Actions
+-   [x] CI/CD pipeline with GitHub Actions
 -   [ ] Production monitoring with Azure Application Insights
 
 ------------------------------------------------------------------------
